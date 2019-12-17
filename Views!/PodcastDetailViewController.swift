@@ -38,15 +38,15 @@ class PodcastDetailViewController: UIViewController {
         
         let favorite = Favorites(trackId: podcast.trackId, favoritedBy: "Tiffany Obi", collectionName: podcast.collectionName, artworkUrl600: podcast.artworkUrl600)
         
-        FavoritesApiClient.favoritePodcast(for: favorite) { (result) in
+        FavoritesApiClient.favoritePodcast(for: favorite) { [weak self] (result) in
             switch result {
             case .failure(let appError):
                 DispatchQueue.main.async {
-                    self.showAlert(title: "Couldn't Add As Favorite", message: "\(appError)")
+                    self?.showAlert(title: "Couldn't Add As Favorite", message: "\(appError)")
             }
             case .success:
                 DispatchQueue.main.async {
-                    self.showAlert(title: "Awesome! We Love That Podcast Too!", message: "\(favorite.collectionName) was posted!")
+                    self?.showAlert(title: "Awesome! We Love That Podcast Too!", message: "\(favorite.collectionName) was posted!")
                 }
         }
     }
@@ -61,16 +61,16 @@ class PodcastDetailViewController: UIViewController {
         countryLabel.text = "Country:\(podcast.country)"
         
         trackCount.text = "Track Count: \(podcast.trackCount)"
-        imageView.getImage(with: podcast.artworkUrl600) { (result) in
+        imageView.getImage(with: podcast.artworkUrl600) { [weak self] (result) in
             switch result {
             case .failure:
                 DispatchQueue.main.async {
-                    self.imageView.image = UIImage(systemName: "circle")
+                    self?.imageView.image = UIImage(systemName: "circle")
                 }
                 
             case .success(let image):
                 DispatchQueue.main.async {
-                    self.imageView.image = image
+                    self?.imageView.image = image
                 }
             }
         }

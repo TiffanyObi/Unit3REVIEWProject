@@ -24,16 +24,16 @@ class PodcastTableViewCell: UITableViewCell {
        
         genreLabel.text = podcast.primaryGenreName
         
-        podcastImageView.getImage(with: podcast.artworkUrl100) { (result) in
+        podcastImageView.getImage(with: podcast.artworkUrl100) { [weak self](result) in
             switch result {
             case .failure:
                 DispatchQueue.main.async {
-                    self.podcastImageView.image = UIImage(systemName: "circle")
+                    self?.podcastImageView.image = UIImage(systemName: "circle")
                 }
                 
             case .success(let image):
                 DispatchQueue.main.async {
-                    self.podcastImageView.image = image
+                    self?.podcastImageView.image = image
                 }
             }
         }

@@ -31,16 +31,16 @@ class PodcastViewController: UIViewController {
     }
 }
     func loadPodcasts(for searchQuery: String) {
-        PodcastApiClient.getPodcasts(for: searchQuery) { (result) in
+        PodcastApiClient.getPodcasts(for: searchQuery) { [weak self](result) in
             switch result {
             case .failure(let appError):
                 DispatchQueue.main.async {
-                    self.showAlert(title: "App Error", message: "\(appError)")
+                    self?.showAlert(title: "App Error", message: "\(appError)")
                 }
                 
             case .success(let podcasts):
                 DispatchQueue.main.async {
-                    self.podcasts = podcasts
+                    self?.podcasts = podcasts
                 }
             }
         }
