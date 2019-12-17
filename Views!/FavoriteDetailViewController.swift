@@ -25,9 +25,10 @@ class FavoriteDetailViewController: UIViewController {
     }
     
    func updateUI() {
-    detailLabel.text = favorite.favoritedBy
+    //view.backgroundColor =
+    detailLabel.text = "Favorited By: \n \(favorite.favoritedBy)"
         
-    favoriteNameLabel.text = favorite.collectionName
+    favoriteNameLabel.text = "Collection Name: \n \(favorite.collectionName)"
     
     favoritedImageView.getImage(with: favorite.artworkUrl600) {[weak self] (result) in
         switch result {

@@ -37,11 +37,13 @@ class FavoritesViewController: UIViewController {
                 switch result {
                 case .failure(let appError):
                     DispatchQueue.main.async {
+                        self?.refreshControl.endRefreshing()
                         self?.showAlert(title: "App Error", message: "\(appError)")
                     }
                     
                 case .success(let favorites):
                     DispatchQueue.main.async {
+                        self?.refreshControl.endRefreshing()
                         self?.favorites = favorites.filter {$0.favoritedBy == "Tiffany Obi"}
                     }
                 }
