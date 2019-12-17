@@ -10,7 +10,7 @@ import UIKit
 
 class FavoritesViewController: UIViewController {
 
-    var favorites = []
+    var favorites =
     
     override func viewDidLoad() {
         super.viewDidLoad()
