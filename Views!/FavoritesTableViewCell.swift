@@ -14,7 +14,7 @@ class FavoritesTableViewCell: UITableViewCell {
     
     @IBOutlet weak var favoritesImageView: UIImageView!
 
-    func configureCell(for favorite: Favorites) {
+    func configureCell(for favorite: Podcast) {
         
         self.backgroundColor = .systemTeal
         

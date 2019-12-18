@@ -14,7 +14,7 @@ class FavoritesViewController: UIViewController {
     
     private var refreshControl: UIRefreshControl!
     
-    var favorites = [Favorites]() {
+    var favorites = [Podcast]() {
         didSet{
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -33,7 +33,7 @@ class FavoritesViewController: UIViewController {
     
 
  @objc func getFavorites() {
-        FavoritesApiClient.getFavoritesList(){ [weak self](result) in
+        PodcastsAndFavoritesApiClient.getFavoritesList(){ [weak self](result) in
                 switch result {
                 case .failure(let appError):
                     DispatchQueue.main.async {
@@ -51,12 +51,12 @@ class FavoritesViewController: UIViewController {
         }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let favoriteDetails = segue.destination as? FavoriteDetailViewController, let indexPath = tableView.indexPathForSelectedRow else { fatalError("check prepare for segue in favorites controller")
+        guard let favoriteDetails = segue.destination as? PodcastDetailViewController, let indexPath = tableView.indexPathForSelectedRow else { fatalError("check prepare for segue in favorites controller")
         }
         
         let favoritedPodcast = favorites[indexPath.row]
         
-        favoriteDetails.favorite = favoritedPodcast
+        favoriteDetails.favorited = favoritedPodcast
     }
     
     func configureRefreshControl() {

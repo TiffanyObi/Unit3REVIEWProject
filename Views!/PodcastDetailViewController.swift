@@ -22,11 +22,14 @@ class PodcastDetailViewController: UIViewController {
     
     @IBOutlet weak var buttonColorChanged: UIButton!
     
-    var podcast: Podcast!
+    //var podcast: Podcast!
+    var favorited: Podcast!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         updateUI()
+      
         
     }
     
@@ -36,9 +39,9 @@ class PodcastDetailViewController: UIViewController {
         
         buttonColorChanged.backgroundColor = .systemRed
         
-        let favorite = Favorites(trackId: podcast.trackId, favoritedBy: "Tiffany Obi", collectionName: podcast.collectionName, artworkUrl600: podcast.artworkUrl600)
+        let favorite = Podcast(wrapperType: favorited.wrapperType, kind: favorited.kind, trackId: favorited.trackId, artistName: favorited.artistName, collectionName: favorited.collectionName, artworkUrl600: favorited.artworkUrl600, releaseDate: favorited.releaseDate, trackCount: favorited.trackCount, country: favorited.country, primaryGenreName: favorited.primaryGenreName, artworkUrl100: favorited.artworkUrl100, genres: favorited.genres, favoritedBy: "Tiffany Obi")
         
-        FavoritesApiClient.favoritePodcast(for: favorite) { [weak self] (result) in
+        PodcastsAndFavoritesApiClient.favoritePodcast(for: favorite) { [weak self] (result) in
             switch result {
             case .failure(let appError):
                 DispatchQueue.main.async {
@@ -51,17 +54,21 @@ class PodcastDetailViewController: UIViewController {
         }
     }
 }
+    
     func updateUI() {
+        if favorited.favoritedBy != nil {
+            buttonColorChanged.isEnabled = false
+        }
         view.backgroundColor = .systemPurple
         
-        podcastNameLabel.text = podcast.collectionName
+        podcastNameLabel.text = favorited.collectionName
         
-        artistNameLabel.text = podcast.artistName
+        artistNameLabel.text = favorited.artistName
         
-        countryLabel.text = "Country:\(podcast.country)"
+        countryLabel.text = "Country:\(favorited.country ?? "")"
         
-        trackCount.text = "Track Count: \(podcast.trackCount)"
-        imageView.getImage(with: podcast.artworkUrl600) { [weak self] (result) in
+        
+        imageView.getImage(with: favorited.artworkUrl600) { [weak self] (result) in
             switch result {
             case .failure:
                 DispatchQueue.main.async {
@@ -75,5 +82,7 @@ class PodcastDetailViewController: UIViewController {
             }
         }
     }
+    
+    
     
 }

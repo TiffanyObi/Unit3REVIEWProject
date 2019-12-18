@@ -180,7 +180,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EqX-s8-C4b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2498.5507246376815" y="-84.375"/>
+            <point key="canvasLocation" x="2659" y="267"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Ff6-lM-Phe">
@@ -263,7 +263,7 @@
                                         <connections>
                                             <outlet property="favoritesImageView" destination="pWU-5a-iGO" id="U5H-l2-Ryg"/>
                                             <outlet property="favoritesNameLabel" destination="Z4r-o5-Kju" id="O0Z-3V-YQJ"/>
-                                            <segue destination="oAl-CA-Inr" kind="show" id="Gsv-st-h6C"/>
+                                            <segue destination="A0m-pH-YxQ" kind="show" identifier="favoritesSegue" id="PRz-N3-mEf"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -286,56 +286,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oi7-wy-Rzs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1773.913043478261" y="853.79464285714278"/>
-        </scene>
-        <!--Favorite Detail View Controller-->
-        <scene sceneID="lSE-Hg-UIh">
-            <objects>
-                <viewController id="oAl-CA-Inr" customClass="FavoriteDetailViewController" customModule="Unit3REVIEWProject" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="eB7-dx-VJu">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ilt-Ig-WdL">
-                                <rect key="frame" x="0.0" y="88" width="414" height="322"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9hE-4U-o0V">
-                                <rect key="frame" x="20" y="438" width="374" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gtx-HZ-pft">
-                                <rect key="frame" x="100" y="574" width="214" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" red="0.88889246682053702" green="0.82024174445110631" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <constraints>
-                            <constraint firstItem="ilt-Ig-WdL" firstAttribute="trailing" secondItem="6Fv-YF-6w9" secondAttribute="trailing" id="2KV-mn-qkh"/>
-                            <constraint firstItem="9hE-4U-o0V" firstAttribute="leading" secondItem="6Fv-YF-6w9" secondAttribute="leading" constant="20" id="3bL-EM-1mG"/>
-                            <constraint firstItem="ilt-Ig-WdL" firstAttribute="leading" secondItem="6Fv-YF-6w9" secondAttribute="leading" id="8mw-C2-ccY"/>
-                            <constraint firstItem="gtx-HZ-pft" firstAttribute="leading" secondItem="6Fv-YF-6w9" secondAttribute="leading" constant="100" id="Sz6-cw-EsF"/>
-                            <constraint firstItem="6Fv-YF-6w9" firstAttribute="trailing" secondItem="gtx-HZ-pft" secondAttribute="trailing" constant="100" id="VRa-aI-hYR"/>
-                            <constraint firstItem="gtx-HZ-pft" firstAttribute="top" secondItem="9hE-4U-o0V" secondAttribute="bottom" constant="100" id="Yvd-3r-ssV"/>
-                            <constraint firstItem="ilt-Ig-WdL" firstAttribute="top" secondItem="6Fv-YF-6w9" secondAttribute="top" id="gru-1B-BFu"/>
-                            <constraint firstItem="9hE-4U-o0V" firstAttribute="top" secondItem="ilt-Ig-WdL" secondAttribute="bottom" constant="28" id="hDP-ib-Rh2"/>
-                            <constraint firstItem="6Fv-YF-6w9" firstAttribute="trailing" secondItem="9hE-4U-o0V" secondAttribute="trailing" constant="20" id="qay-AN-JYR"/>
-                            <constraint firstItem="ilt-Ig-WdL" firstAttribute="height" secondItem="eB7-dx-VJu" secondAttribute="height" multiplier="0.359375" id="rGh-h6-9Zq"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Fv-YF-6w9"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="XX2-6Y-kA7"/>
-                    <connections>
-                        <outlet property="detailLabel" destination="gtx-HZ-pft" id="r3S-l0-4x8"/>
-                        <outlet property="favoriteNameLabel" destination="9hE-4U-o0V" id="ZHO-nh-Ezz"/>
-                        <outlet property="favoritedImageView" destination="ilt-Ig-WdL" id="Obz-er-3D5"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zSi-am-PQi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2498.5507246376815" y="853.79464285714278"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="4M4-nc-m6B">
@@ -360,4 +310,7 @@
     <resources>
         <image name="heart.fill" catalog="system" width="64" height="54"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="PRz-N3-mEf"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -8,9 +8,39 @@
 
 import Foundation
 
-struct FavoritesApiClient {
+struct PodcastsAndFavoritesApiClient {
     
-    static func favoritePodcast(for favorite: Favorites, completion: @escaping (Result<Bool,AppError>)->()) {
+    static func getPodcasts(for searchQuery: String,completion: @escaping (Result<[Podcast],AppError>)->()) {
+        
+        let searchQuery = searchQuery
+        let podcastEndpointURL = "https://itunes.apple.com/search?media=podcast&limit=200&term=\(searchQuery)"
+        
+        guard let url = URL(string: podcastEndpointURL) else {
+            completion(.failure(.badURL(podcastEndpointURL)))
+            return
+        }
+        
+        let request = URLRequest(url: url)
+        
+        NetworkHelper.shared.performDataTask(with: request) { (result) in
+            switch result {
+            case .failure(let appError):
+                completion(.failure(.networkClientError(appError)))
+                
+            case .success(let data):
+                do {
+                    let podcasts = try JSONDecoder().decode(AllPodCasts.self, from: data)
+                    completion(.success(podcasts.results))
+                } catch {
+                    completion(.failure(.decodingError(error)))
+                }
+            }
+        }
+        
+    }
+    
+    
+    static func favoritePodcast(for favorite: Podcast, completion: @escaping (Result<Bool,AppError>)->()) {
         
         let endpointURLString = "https://5c2e2a592fffe80014bd6904.mockapi.io/api/v1/favorites"
                 
@@ -57,7 +87,7 @@ struct FavoritesApiClient {
     
     
     
-    static func getFavoritesList(completion: @escaping (Result<[Favorites],AppError>)->()) {
+    static func getFavoritesList(completion: @escaping (Result<[Podcast],AppError>)->()) {
         
         let endpointURL = "https://5c2e2a592fffe80014bd6904.mockapi.io/api/v1/favorites"
         
@@ -75,7 +105,7 @@ struct FavoritesApiClient {
                 
             case .success(let data):
                 do {
-                    let favorites = try JSONDecoder().decode([Favorites].self, from: data)
+                    let favorites = try JSONDecoder().decode([Podcast].self, from: data)
                     completion(.success(favorites))
                 } catch {
                     completion(.failure(.decodingError(error)))

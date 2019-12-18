@@ -31,7 +31,7 @@ class PodcastViewController: UIViewController {
     }
 }
     func loadPodcasts(for searchQuery: String) {
-        PodcastApiClient.getPodcasts(for: searchQuery) { [weak self](result) in
+        PodcastsAndFavoritesApiClient.getPodcasts(for: searchQuery) { [weak self](result) in
             switch result {
             case .failure(let appError):
                 DispatchQueue.main.async {
@@ -62,7 +62,7 @@ class PodcastViewController: UIViewController {
         
         let podcast = podcasts[indexpath.row]
         
-        podcastDetails.podcast = podcast
+        podcastDetails.favorited = podcast
     }
 
 }

@@ -24,7 +24,7 @@ class PodcastTableViewCell: UITableViewCell {
        
         genreLabel.text = podcast.primaryGenreName
         
-        podcastImageView.getImage(with: podcast.artworkUrl100) { [weak self](result) in
+        podcastImageView.getImage(with: podcast.artworkUrl100 ?? "") { [weak self](result) in
             switch result {
             case .failure:
                 DispatchQueue.main.async {
